@@ -37,7 +37,7 @@ export const authSlice = createSlice({
         state.users = action.payload;
       },
       setPage: (state,action) => {
-        state.currPage=action.payload.page;
+        state.currPage=action.payload;
       },
       setTotalPages: (state,action) => {
         state.totalPages=action.payload.total_pages;

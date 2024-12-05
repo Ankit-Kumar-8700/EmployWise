@@ -10,7 +10,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import { ArrowRight, DeleteForever, Edit, ManageAccounts, Search } from "@mui/icons-material";
 import styled from "@emotion/styled";
@@ -47,8 +47,9 @@ function HomePage() {
 
     let [query,setQuery] = useState("");
 
-    const getUsers=async (newPage=1)=>{
-      if(currPage===newPage) return;
+    const getUsers = useCallback(async (newPage = 1) => {
+      console.log('ok');
+      if (currPage === newPage) return;
       try {
         const response = await fetch(`${serverLink}/api/users?page=${newPage}`, {
           method: "GET",
@@ -58,16 +59,15 @@ function HomePage() {
         });
         if (response.ok) {
           const data = await response.json();
-          dispatch(
-            setNewPage(data)
-          );
+          dispatch(setNewPage(data));
         } else {
           alert("Unable to fetch Users list.");
         }
       } catch (error) {
         alert("Internal Server Error! Please try again later..");
       }
-    };
+    }, [currPage, serverLink, dispatch]);
+    
 
     const deleteUser= async (userId)=>{
         try {
@@ -125,17 +125,18 @@ function HomePage() {
     };
   
 
-    useEffect(()=>{
+    useEffect(() => {
       getUsers(currPage);
-    },[]);
+    }, [getUsers, currPage]);
+    
 
     const handleInputChange = (e) => {
       const { name, value } = e.target;
       setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handlePageChange=(event,value)=>{
-      getUsers(value);
+    const handlePageChange = async (event,value)=>{
+      await getUsers(value);
     }
 
     const handleSearch= async ()=>{
