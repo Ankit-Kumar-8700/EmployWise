@@ -17,14 +17,12 @@ import {
   Menu,
   Close,
 } from "@mui/icons-material";
-import { useDispatch, useSelector } from "react-redux";
-import { setMode, setLogout, setBooks, setGenre, setPage, setTotalPages } from "../state/state";
+import { useDispatch } from "react-redux";
+import { setMode, setLogout } from "../state/state";
 import { useNavigate } from "react-router-dom";
 
-const Navbar=({home})=>{
+const Navbar=()=>{
     const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
-    const serverLink=useSelector((state)=> state.serverLink);
-    const token = useSelector((state) => state.token);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");

@@ -12,12 +12,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
-import { ArrowRight, Check, DeleteForever, Edit, ManageAccounts, Search } from "@mui/icons-material";
+import { ArrowRight, DeleteForever, Edit, ManageAccounts, Search } from "@mui/icons-material";
 import styled from "@emotion/styled";
 import logo from "../images/logo.png";
 import Image from "../components/image";
 import { useNavigate } from "react-router-dom";
-import { setNewPage, setUsers, setPage, setTotalPages } from "../state/state";
+import { setNewPage, setUsers } from "../state/state";
 
 function HomePage() {
       const navigate=useNavigate();
